@@ -9,19 +9,41 @@
   </head>
   <body>
     <header>
-      
       <h1 class="title">Latest Topics</h1>
+      <div class="controls">
+        <label for="sort-select">Sort by:</label>
+        <select id="sort-select">
+          <option value="activity">Activity</option>
+          <option value="replies">Replies</option>
+          <option value="views">Views</option>
+        </select>
+      
+        <label for="category-select">Filter by Category:</label>
+        <select id="category-select">
+          <option value="all">All</option>
+          <option value="299">Career Advice</option>
+          <option value="409">Project Feedback</option>
+          <option value="417">freeCodeCamp Support</option>
+          <option value="421">JavaScript</option>
+          <option value="423">HTML - CSS</option>
+          <option value="424">Python</option>
+          <option value="432">You Can Do This!</option>
+          <option value="560">Backend Development</option>
+        </select>
+      </div>
+      
     </header>
     <main>
       <div class="table-wrapper">
         <table>
           <thead>
             <tr>
-              <th id="topics">Topics</th>
-              <th id="avatars">Avatars</th>
-              <th id="replies">Replies</th>
-              <th id="views">Views</th>
-              <th id="activity">Activity</th>
+              <th>Topics</th>
+              <th>Avatars</th>
+              <th>Category</th>
+              <th>Replies</th>
+              <th>Views</th>
+              <th>Activity</th>
             </tr>
           </thead>
           <tbody id="posts-container"></tbody>

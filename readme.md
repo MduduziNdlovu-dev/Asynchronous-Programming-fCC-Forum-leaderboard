@@ -1,4 +1,5 @@
 # 🚀 fCC Forum Leaderboard
+![alt text](image.png)
 
 Welcome to the **fCC Forum Leaderboard**! This project fetches and displays the latest discussions from the freeCodeCamp forum in a clean, responsive, and dynamic table format. It's a showcase of my front-end development skills, using modern JavaScript, API handling, and responsive design.
 
