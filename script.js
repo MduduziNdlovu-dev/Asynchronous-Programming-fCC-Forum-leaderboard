@@ -64,17 +64,22 @@ const timeAgo = (time) => {
     }
   }
 
-const avatars = (posters, users) => {
+  const avatars = (posters, users) => {
+    const placeholderAvatar = "avatar-generations_prsz.jpg"; // Ensure placeholder is accessible
+
     return posters.map((poster) => {
         const user = users.find((user) => user.id === poster.user_id);
+        let userAvatarUrl = placeholderAvatar; // Default to placeholder
 
-        if (user){
-            const avatar = user.avatar_template.replace(/{size}/, 30);
-            const userAvatarUrl = avatar.startsWith("/user_avatar/")? avatarUrl.concat(avatar) : avatar;
-            return `<img src="${userAvatarUrl}" alt="${user.name}" >`;
+        if (user && user.avatar_template) {
+            const avatar = user.avatar_template.replace(/{size}/, "30");
+            userAvatarUrl = avatar.startsWith("/user_avatar/") ? avatarUrl.concat(avatar) : avatar;
         }
+
+        return `<img src="${userAvatarUrl}" onerror="this.onerror=null; this.src='${placeholderAvatar}';" alt="${user?.name || 'User'}">`;
     }).join("");
-}
+    };
+
 
 const fetchData = async () => {
     try {
@@ -107,15 +112,14 @@ const showLatestPosts = (data) => {
       } = item;
   
       return `
-        <tr>
-          <td><a href="${forumTopicUrl}${slug}/${id}" target="_blank" class="post-title">${title}</a></td>
-          <td><div class="avatar-container">${avatars(posters, users)}></div></td>           
-          <td>${forumCategory(category_id)}</td>
-          <td>${posts_count - 1 }</td>
-          <td>${viewCount(views)}</td>
-          <td>${timeAgo(bumped_at)}</td>
-        
-        </tr>
-      `;
+    <tr>
+      <td><a href="${forumTopicUrl}${slug}/${id}" target="_blank" class="post-title">${title}</a></td>
+      <td><div class="avatar-container">${avatars(posters, users)}</div></td> <!-- Fixed extra '>' -->
+      <td>${forumCategory(category_id)}</td> <!-- Ensure category appears correctly -->
+      <td>${posts_count - 1 }</td>
+      <td>${viewCount(views)}</td>
+      <td>${timeAgo(bumped_at)}</td>
+    </tr>
+`;
     }).join("");
   };
